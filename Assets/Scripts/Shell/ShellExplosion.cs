@@ -23,7 +23,7 @@ public class ShellExplosion : MonoBehaviour
         // Find all the tanks in an area around the shell and damage them.
 		Collider[] colliders = Physics.OverlapSphere(transform.position, m_ExplosionRadius);
 		for (int i = 0; i < colliders.Length; i++) {
-			Debug.Log ("ShellExposion: " + colliders.Length);
+////			Debug.Log ("ShellExposion: " + colliders.Length);
 			Rigidbody targetRigidbody = colliders [i].GetComponent<Rigidbody> ();
 			if (targetRigidbody)
 				targetRigidbody.AddExplosionForce (m_ExplosionForce, transform.position, m_ExplosionRadius);

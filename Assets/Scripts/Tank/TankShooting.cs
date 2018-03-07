@@ -70,4 +70,21 @@ public class TankShooting : MonoBehaviour
 		m_ShootingAudio.Play ();
 		m_CurrentLaunchForce = m_MinLaunchForce;
     }
+
+	private bool m_FiredSmart = false;
+	private float m_TimerSmart;
+	public void FireSmart(int force)
+	{
+		if (m_FiredSmart == false) {
+			m_FiredSmart = true;
+			m_TimerSmart = 2.0f;
+			m_CurrentLaunchForce = force;
+			Fire ();
+		} else {
+			m_TimerSmart -= Time.deltaTime;
+			if (m_TimerSmart < 0) {
+				m_FiredSmart = false;
+			}
+		}
+	}
 }
