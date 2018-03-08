@@ -5,18 +5,28 @@ using UnityEngine;
 [CreateAssetMenu (menuName = "Nature/Confused")]
 public class Confused : Nature
 {
+	public bool m_FireEnable;
 	[Range (15,30)]
 	public int m_Force;
-	public bool m_FireEnable;
-	public bool m_MoveEnable;
 
-	public override void Act (MonoBehaviour tank)
+	public bool m_MoveEnable;
+	public float m_MoveInputValue;
+	public float m_TurnInputValue;
+
+	public override void ActUpdate (MonoBehaviour tank)
 	{
 		if (m_FireEnable) {
 			TankShooting tankShooting = tank.GetComponent<TankShooting> ();
-			tankShooting.FireSmart (m_Force);
+			tankShooting.FireNature (m_Force);
 		}
+	}
+
+	public override void ActFixedUpdate (MonoBehaviour tank)
+	{
 		if (m_MoveEnable) {
+			TankMovement tankMovement = tank.GetComponent<TankMovement> ();
+			tankMovement.MoveNature (m_MoveInputValue);
+			tankMovement.TurnNature (m_TurnInputValue);
 		}
 	}
 }

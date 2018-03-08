@@ -71,19 +71,19 @@ public class TankShooting : MonoBehaviour
 		m_CurrentLaunchForce = m_MinLaunchForce;
     }
 
-	private bool m_FiredSmart = false;
-	private float m_TimerSmart;
-	public void FireSmart(int force)
+	private bool m_FiredNature = false;
+	private float m_TimerNature;
+	public void FireNature(int force)
 	{
-		if (m_FiredSmart == false) {
-			m_FiredSmart = true;
-			m_TimerSmart = 2.0f;
+		if (m_FiredNature == false) {
+			m_FiredNature = true;
+			m_TimerNature = 2.0f;
 			m_CurrentLaunchForce = force;
 			Fire ();
 		} else {
-			m_TimerSmart -= Time.deltaTime;
-			if (m_TimerSmart < 0) {
-				m_FiredSmart = false;
+			m_TimerNature -= Time.deltaTime;
+			if (m_TimerNature < 0) {
+				m_FiredNature = false;
 			}
 		}
 	}

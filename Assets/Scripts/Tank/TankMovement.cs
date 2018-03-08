@@ -93,9 +93,20 @@ public class TankMovement : MonoBehaviour
 
     private void Turn()
     {
+
         // Adjust the rotation of the tank based on the player's input.
 		float turn = m_TurnInputValue * m_TurnSpeed * Time.deltaTime;
 		Quaternion turnRotation = Quaternion.Euler (0f, turn, 0f);
 		m_Rigidbody.MoveRotation (m_Rigidbody.rotation * turnRotation);
     }
+
+	public void MoveNature(float moveInputValue) {
+		m_MovementInputValue = moveInputValue;
+		Move ();
+	}
+
+	public void TurnNature(float turnInputValue) {
+		m_TurnInputValue = turnInputValue;
+		Turn ();
+	}
 }

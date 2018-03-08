@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class Nature : ScriptableObject {
 
-	public abstract void Act (MonoBehaviour tank);
+	public abstract void ActUpdate (MonoBehaviour tank);
+	public abstract void ActFixedUpdate (MonoBehaviour tank);
 
 }
