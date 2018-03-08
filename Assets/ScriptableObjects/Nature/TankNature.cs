@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TankSmarts : MonoBehaviour {
+public class TankNature : MonoBehaviour {
 
-	public Smarts m_Smartness;
+	public Nature m_Nature;
 
 	// Update is called once per frame
 	void Update () {
-		m_Smartness.Think (this);
+		m_Nature.Act (this);
 	}
 }
