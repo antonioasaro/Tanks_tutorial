@@ -10,7 +10,9 @@ public class Confused : Nature
 	public int m_Force;
 
 	public bool m_MoveEnable;
+	[Range (0.0f, 0.25f)]
 	public float m_MoveInputValue;
+	[Range (0.0f, 0.25f)]
 	public float m_TurnInputValue;
 
 	public override void ActUpdate (MonoBehaviour tank)
@@ -29,4 +31,5 @@ public class Confused : Nature
 			tankMovement.TurnNature (m_TurnInputValue);
 		}
 	}
+
 }

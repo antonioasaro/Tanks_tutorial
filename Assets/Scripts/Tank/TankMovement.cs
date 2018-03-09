@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.AI;
+using System.Collections;
 
 public class TankMovement : MonoBehaviour
 {
@@ -15,13 +17,16 @@ public class TankMovement : MonoBehaviour
     private Rigidbody m_Rigidbody;         
     private float m_MovementInputValue;    
     private float m_TurnInputValue;        
-    private float m_OriginalPitch;         
+    private float m_OriginalPitch;    
 
+	private NavMeshAgent m_NavMeshAgent;
+	private GameObject[] m_Enemy;
 
     private void Awake()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
-    }
+		m_NavMeshAgent = GetComponent<NavMeshAgent> ();
+	}
 
 
     private void OnEnable ()
@@ -105,8 +110,37 @@ public class TankMovement : MonoBehaviour
 		Move ();
 	}
 
+	public bool m_Turning = false;
+	public float m_Timer;
+	public float m_Left;
 	public void TurnNature(float turnInputValue) {
-		m_TurnInputValue = turnInputValue;
+		if (!m_Turning) {
+			m_Left = Random.Range (0f, 1.0f);
+			m_Timer = 2.0f;
+			m_Turning = true;
+		}
+		if (m_Left < 0.5f) {
+			m_TurnInputValue = -turnInputValue;
+		} else {
+			m_TurnInputValue = turnInputValue;
+		}
 		Turn ();
+		m_Timer = m_Timer - Time.deltaTime;
+		if (m_Timer < 0) {
+			m_Timer = 2.0f;
+			m_Turning = false;
+		}
+	}
+
+	public void NavAgentNature() {
+		m_Enemy = GameObject.FindGameObjectsWithTag ("Player");
+		if (m_Enemy != null) {
+			for (int i = 0; i < m_Enemy.Length; i++) {
+				float distance = Vector3.Distance (m_Enemy[i].transform.position, m_Rigidbody.position);
+				if (distance > 1.0f) {
+					m_NavMeshAgent.destination = m_Enemy[i].transform.position;
+				}
+			}
+		}
 	}
 }
