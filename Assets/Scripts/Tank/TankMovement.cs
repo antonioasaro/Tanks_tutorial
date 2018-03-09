@@ -105,32 +105,34 @@ public class TankMovement : MonoBehaviour
 		m_Rigidbody.MoveRotation (m_Rigidbody.rotation * turnRotation);
     }
 
+
 	public void MoveNature(float moveInputValue) {
 		m_MovementInputValue = moveInputValue;
 		Move ();
 	}
 
-	public bool m_Turning = false;
-	public float m_Timer;
-	public float m_Left;
-	public void TurnNature(float turnInputValue) {
-		if (!m_Turning) {
-			m_Left = Random.Range (0f, 1.0f);
-			m_Timer = 2.0f;
-			m_Turning = true;
+	public bool m_TurningNature = false;
+	public float m_TimerNature;
+	public float m_LeftNature;
+	public void TurnNature(float turnInputValue, float turnInterval) {
+		if (!m_TurningNature) {
+			m_LeftNature = Random.Range (0f, 1.0f);
+			m_TimerNature = turnInterval;
+			m_TurningNature = true;
+		} else {
+			m_TimerNature -= Time.deltaTime;
+			if (m_TimerNature <= 0) {
+				m_TurningNature = false;
+			}	
 		}
-		if (m_Left < 0.5f) {
+		if (m_LeftNature < 0.5f) {
 			m_TurnInputValue = -turnInputValue;
 		} else {
 			m_TurnInputValue = turnInputValue;
 		}
 		Turn ();
-		m_Timer = m_Timer - Time.deltaTime;
-		if (m_Timer < 0) {
-			m_Timer = 2.0f;
-			m_Turning = false;
-		}
 	}
+
 
 	public void NavAgentNature() {
 		m_Enemy = GameObject.FindGameObjectsWithTag ("Player");
@@ -143,4 +145,5 @@ public class TankMovement : MonoBehaviour
 			}
 		}
 	}
+
 }

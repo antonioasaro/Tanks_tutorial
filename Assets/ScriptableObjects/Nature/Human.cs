@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu (menuName = "Nature/Hunter")]
-public class Hunter : Nature
+[CreateAssetMenu (menuName = "Nature/Human")]
+public class Human : Nature
 {
 	
 	public override void ActUpdate (MonoBehaviour tank)
@@ -12,9 +12,6 @@ public class Hunter : Nature
 
 	public override void ActFixedUpdate (MonoBehaviour tank)
 	{
-		TankMovement tankMovement = tank.GetComponent<TankMovement> ();
-		tankMovement.NavAgentNature ();
-
 	}
 
 }

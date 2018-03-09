@@ -71,13 +71,14 @@ public class TankShooting : MonoBehaviour
 		m_CurrentLaunchForce = m_MinLaunchForce;
     }
 
+
 	private bool m_FiredNature = false;
 	private float m_TimerNature;
-	public void FireNature(int force)
+	public void FireNature(int force, float interval)
 	{
 		if (m_FiredNature == false) {
 			m_FiredNature = true;
-			m_TimerNature = 2.0f;
+			m_TimerNature = interval;
 			m_CurrentLaunchForce = force;
 			Fire ();
 		} else {
