@@ -162,7 +162,7 @@ public class TankMovement : MonoBehaviour
 		LockedOnTarget = true;
 		Debug.DrawRay (position, forward, Color.blue);
 		if (!m_NavMeshAgent.hasPath || (m_NavMeshAgent.remainingDistance < 4f)) {
-			Debug.Log ("Scanning for tanks");
+//			Debug.Log ("Scanning for tanks");
 			Debug.DrawRay (position, forward, Color.red);
 			LockedOnTarget = false;
 			Turn ();
