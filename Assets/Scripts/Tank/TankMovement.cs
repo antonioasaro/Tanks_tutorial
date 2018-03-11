@@ -161,7 +161,8 @@ public class TankMovement : MonoBehaviour
 
 		LockedOnTarget = true;
 		Debug.DrawRay (position, forward, Color.blue);
-		if (!m_NavMeshAgent.hasPath) {
+		if (!m_NavMeshAgent.hasPath || (m_NavMeshAgent.remainingDistance < 4f)) {
+			Debug.Log ("Scanning for tanks");
 			Debug.DrawRay (position, forward, Color.red);
 			LockedOnTarget = false;
 			Turn ();
@@ -170,6 +171,7 @@ public class TankMovement : MonoBehaviour
 				if (hit.collider != null) {
 					Debug.Log ("Hit tank");
 					Debug.DrawRay (position, forward, Color.green);
+					Debug.DrawLine (hit.point, hit.point + (Vector3.up * 10f), Color.black, 30f, false);
 					m_NavMeshAgent.destination = hit.point;
 				}
 			}
